@@ -14,7 +14,7 @@
         <!-- Bootstrap -->
         <link href="{{ asset ('assets/css/bootstrap.css')}}" rel="stylesheet">
         <!-- Slick slider -->
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/slick.css"/')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/slick.css')}}">
         <!-- Fancybox slider -->
         <link rel="stylesheet" href="{{ asset(' assets/css/jquery.fancybox.css')}}" type="text/css" media="screen" />
         <!-- Animate css -->
@@ -47,6 +47,8 @@
 <!-- BEGAIN PRELOADER -->
 <div id="preloader">
     <div id="status">&nbsp;</div>
+
+
 </div>
 <!-- END PRELOADER -->
 
@@ -163,7 +165,7 @@
     </div>
 </div>
 <!-- End login modal window -->
-{% block body %}
+
     <!-- BEGIN MENU -->
     <section id="menu-area">
         <nav class="navbar navbar-default" role="navigation">
@@ -209,6 +211,8 @@
         </nav>
     </section>
     <!-- END MENU -->
+{% block body %}
+
 {% endblock  %}
 
 
