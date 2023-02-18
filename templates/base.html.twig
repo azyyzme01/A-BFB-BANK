@@ -95,7 +95,8 @@
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <div class="header-login">
-                        <a class="login modal-form" data-target="#login-form" data-toggle="modal" href="#">Login / Sign Up</a>
+                        {% set target_div_id = 'login-form' %}
+                        <a class="login modal-form"  data-target="#{{ target_div_id }}" data-toggle="modal"  href="#">Login / Sign Up</a>
                     </div>
                 </div>
             </div>
@@ -105,6 +106,7 @@
 <!-- End header -->
 
 <!-- Start login modal window -->
+{% block content %}
 <div aria-hidden="false" role="dialog" tabindex="-1" id="login-form" class="modal leread-modal fade in">
     <div class="modal-dialog">
         <!-- Start login section -->
@@ -114,24 +116,42 @@
                 <h4 class="modal-title"><i class="fa fa-unlock-alt"></i>Login</h4>
             </div>
             <div class="modal-body">
-                <form>
+
+                <form method="post">
+
+
+                    {% if app.user %}
+                        <div class="mb-3">
+                            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                        </div>
+                    {% endif %}
                     <div class="form-group">
-                        <input type="text" placeholder="User name" class="form-control">
+                        <label for="inputEmail">Email</label>
+                        <input type="email"  name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+
                     </div>
                     <div class="form-group">
-                        <input type="password" placeholder="Password" class="form-control">
+                        <label for="inputPassword">Password</label>
+                        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
                     </div>
                     <div class="loginbox">
                         <label><input type="checkbox"><span>Remember me</span></label>
-                        <button class="btn signin-btn" type="button">SIGN IN</button>
+                        <button class="btn signin-btn" type="submit">
+                            Sign in
+                        </button>
                     </div>
+                    <input type="hidden" name="_csrf_token"
+                           value="{{ csrf_token('authenticate') }}"
+                    >
                 </form>
+
             </div>
             <div class="modal-footer footer-box">
                 <a href="#">Forgot password ?</a>
                 <span>No account ? <a id="signup-btn" href="#">Sign Up.</a></span>
             </div>
         </div>
+        {% endblock %}
         <!-- Start signup section -->
         <div id="signup-content" class="modal-content">
             <div class="modal-header">
@@ -210,8 +230,11 @@
                             </ul>
                         </li>
 
-
+                        {% if app.user %}
                         <li><a href="404.html">Profile</a></li>
+                        {% endif %}
+
+
                         <li><a href="contact.html">Convention</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
