@@ -18,6 +18,7 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('name')
             ->add('email',TextType::class,array(
                 'attr' => array(
                     'placeholder' => 'example@gmail.com'),
@@ -50,6 +51,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('city')
         ;
     }
 
