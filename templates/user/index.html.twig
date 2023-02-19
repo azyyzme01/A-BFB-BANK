@@ -3,15 +3,15 @@
 {% block title %}Hello UserController!{% endblock %}
 
 {% block body %}
-<style>
-    .inf-content{
-        border:1px solid #DDDDDD;
-        -webkit-border-radius:10px;
-        -moz-border-radius:10px;
-        border-radius:10px;
-        box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);
-    }
-</style>
+    <style>
+        .inf-content{
+            border:1px solid #DDDDDD;
+            -webkit-border-radius:10px;
+            -moz-border-radius:10px;
+            border-radius:10px;
+            box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);
+        }
+    </style>
 
     <div class="container bootstrap snippets bootdey">
         <div class="panel-body inf-content">
@@ -31,37 +31,40 @@
                     <div class="table-responsive">
                         <table class="table table-user-information">
                             <tbody>
+                            {% for user in users %}
+                                {% if app.user.id== user.id%}
+
                             <tr>
                                 <td>
                                     <strong>
                                         <span class="glyphicon glyphicon-asterisk text-primary"></span>
-                                        Identificacion
+                                        Id
                                     </strong>
                                 </td>
                                 <td class="text-primary">
-
+                                    {{ user.id }}
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <strong>
-                                        <span class="glyphicon glyphicon-user  text-primary"></span>
-                                        Name
+                                        <span class="glyphicon glyphicon-bookmark text-primary"></span>
+                                        Username
                                     </strong>
                                 </td>
                                 <td class="text-primary">
-                                    Bootdey
+                                    {{ user.name }}
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <strong>
-                                        <span class="glyphicon glyphicon-cloud text-primary"></span>
-                                        Lastname
+                                        <span class="glyphicon glyphicon-envelope text-primary"></span>
+                                        Email
                                     </strong>
                                 </td>
                                 <td class="text-primary">
-                                    Bootstrap
+                                    {{ user.email }}
                                 </td>
                             </tr>
 
@@ -86,42 +89,16 @@
                                     </strong>
                                 </td>
                                 <td class="text-primary">
-                                    Admin
+                                    {{ user.roles ? user.roles|json_encode : '' }}
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span class="glyphicon glyphicon-envelope text-primary"></span>
-                                        Email
-                                    </strong>
-                                </td>
-                                <td class="text-primary">
-                                    noreply@email.com
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span class="glyphicon glyphicon-calendar text-primary"></span>
-                                        created
-                                    </strong>
-                                </td>
-                                <td class="text-primary">
-                                    20 jul 20014
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span class="glyphicon glyphicon-calendar text-primary"></span>
-                                        Modified
-                                    </strong>
-                                </td>
-                                <td class="text-primary">
-                                    20 jul 20014 20:00:00
-                                </td>
-                            </tr>
+
+                                    <a href="{{ path ('app_front_edit', {'id': user.id}) }}" >Modifier</a>
+
+
+                                {% endif %}
+                            {% endfor %}
+
                             </tbody>
                         </table>
                     </div>

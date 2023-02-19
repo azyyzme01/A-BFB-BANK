@@ -3,13 +3,14 @@
 {% block title %}Hello InscriptionController!{% endblock %}
 
 {% block body %}
+    <hr>
 <div class="col-lg-6">
 
     <div class="card">
         <div class="card-body">
             {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
-            <h5 class="card-title">Form</h5>
+            <h5 class="card-title">Inscription</h5>
 
             <!-- Vertical Form -->
             <div class="col-12">
@@ -32,6 +33,9 @@
             <label for="inputAddress" class="form-label">city</label>
             {{ form_widget(form.city, {'attr': {'class':'form-control'}}) }}
             <span style="color:red"> {{ form_errors(form.city) }}</span>
+            <label for="inputAddress" class="form-label">agree Terms</label>
+            {{ form_widget(form.agreeTerms) }}
+            <span style="color:red"> {{ form_errors(form.agreeTerms) }}</span>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <button type="reset" class="btn btn-secondary">Reset</button>
