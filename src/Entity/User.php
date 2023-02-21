@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -17,7 +18,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+
+
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\Email(
+        message: "The email '{{ value }}' is not a valid email."
+    )]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -34,6 +40,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $city = null;
+
+    #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 8,
+        max: 8,
+        minMessage: "Your telephone must be 8 numbers",
+        maxMessage: "Your telephone must be 8 numbers"
+    )]
+    private ?int $num_tel = null;
+
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    private ?string $prenomc = null;
 
     public function getId(): ?int
     {
@@ -144,6 +164,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCity(string $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    public function getNumTel(): ?int
+    {
+        return $this->num_tel;
+    }
+
+    public function setNumTel(int $num_tel): self
+    {
+        $this->num_tel = $num_tel;
+
+        return $this;
+    }
+
+    public function getPrenomc(): ?string
+    {
+        return $this->prenomc;
+    }
+
+    public function setPrenomc(string $prenomc): self
+    {
+        $this->prenomc = $prenomc;
 
         return $this;
     }

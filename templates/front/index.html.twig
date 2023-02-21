@@ -1,6 +1,6 @@
 {% extends 'base-back.html.twig' %}
 
-{% block title %}Hello EmployeeController!{% endblock %}
+{% block title %}Modifier Profile{% endblock %}
 
 {% block body %}
 
@@ -159,9 +159,11 @@
                     <thead>
                     <tr>
                         <th>Id</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Numéro de téléphone</th>
                         <th>Email</th>
-                        <th>Roles</th>
-                        <th>Password</th>
+                        <th>City</th>
                         <th>actions</th>
                     </tr>
                     </thead>
@@ -169,9 +171,11 @@
                     {% for user in users %}
                     <tr>
                         <td>{{ user.id }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.Prenomc}}</td>
+                        <td>{{ user.NumTel}}</td>
                         <td>{{ user.email }}</td>
-                        <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                        <td>{{ user.password }}</td>
+                        <td>{{ user.City}}</td>
 
                         <td>
                             <a href="{{ path('app_front_show', {'id': user.id}) }}" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
@@ -186,18 +190,7 @@
                     </tbody>
 
                 </table>
-                <div class="clearfix">
-                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                    <ul class="pagination">
-                        <li class="page-item disabled"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                        <li class="page-item"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item"><a href="#" class="page-link">2</a></li>
-                        <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                        <li class="page-item"><a href="#" class="page-link">4</a></li>
-                        <li class="page-item"><a href="#" class="page-link">5</a></li>
-                        <li class="page-item"><a href="#" class="page-link"><i class="fa fa-angle-double-right"></i></a></li>
-                    </ul>
-                </div>
+
             </div>
         </div>
     </div>

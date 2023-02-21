@@ -41,7 +41,33 @@
 
 
                         </div>
-                        <!-- Form Row-->
+
+                    <div class="mb-3">
+                        <label class="small mb-1" for="inputUsername">Prénom</label>
+
+
+                        {{ form_widget(form.Prenomc, {'attr': {'class':'form-control'}}) }}
+                        <span style="color:red"> {{ form_errors(form.Prenomc) }}</span>
+
+
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label class="small mb-1" for="inputUsername">Numéro de telephone</label>
+
+
+                        {{ form_widget(form.NumTel, {'attr': {'class':'form-control'}}) }}
+                        <span style="color:red"> {{ form_errors(form.NumTel) }}</span>
+
+
+                    </div>
+
+
+
+
+
+                    <!-- Form Row-->
                         <div class="row gx-3 mb-3">
                             <!-- Form Group (first name)-->
 
