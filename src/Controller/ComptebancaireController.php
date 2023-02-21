@@ -1,0 +1,81 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\Comptebancaire;
+use App\Form\ComptebancaireType;
+use App\Repository\ComptebancaireRepository;
+use App\Entity\Transaction;
+use App\Form\TransactionType;
+use App\Repository\TransactionRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+#[Route('/comptebancaire')]
+class ComptebancaireController extends AbstractController
+{
+    #[Route('/', name: 'app_comptebancaire_index', methods: ['GET'])]
+    public function index(ComptebancaireRepository $comptebancaireRepository): Response
+    {
+        return $this->render('comptebancaire/index.html.twig', [
+            'comptebancaires' => $comptebancaireRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/new', name: 'app_comptebancaire_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, ComptebancaireRepository $comptebancaireRepository): Response
+    {
+        $comptebancaire = new Comptebancaire();
+        $form = $this->createForm(ComptebancaireType::class, $comptebancaire);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comptebancaireRepository->save($comptebancaire, true);
+
+            return $this->redirectToRoute('app_comptebancaireback_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('comptebancaire/new.html.twig', [
+            'comptebancaire' => $comptebancaire,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_comptebancaire_show', methods: ['GET'])]
+    public function show(Comptebancaire $comptebancaire): Response
+    {
+        return $this->render('comptebancaire/show.html.twig', [
+            'comptebancaire' => $comptebancaire,
+        ]);
+    }
+
+    #[Route('/{id}/edit', name: 'app_comptebancaire_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Comptebancaire $comptebancaire, ComptebancaireRepository $comptebancaireRepository): Response
+    {
+        $form = $this->createForm(ComptebancaireType::class, $comptebancaire);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comptebancaireRepository->save($comptebancaire, true);
+
+            return $this->redirectToRoute('app_comptebancaire_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('comptebancaire/edit.html.twig', [
+            'comptebancaire' => $comptebancaire,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_comptebancaire_delete', methods: ['POST'])]
+    public function delete(Request $request, Comptebancaire $comptebancaire, ComptebancaireRepository $comptebancaireRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$comptebancaire->getId(), $request->request->get('_token'))) {
+            $comptebancaireRepository->remove($comptebancaire, true);
+        }
+
+        return $this->redirectToRoute('app_comptebancaireback_index', [], Response::HTTP_SEE_OTHER);
+    }
+}
