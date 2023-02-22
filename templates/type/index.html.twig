@@ -1,0 +1,43 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Type index{% endblock %}
+
+{% block body %}
+    <h1>Type index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Etat</th>
+                <th>Nombre</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for type in types %}
+            <tr>
+                <td>{{ type.id }}</td>
+                <td>{{ type.nom }}</td>
+                <td>{{ type.description }}</td>
+                <td>{{ type.etat ? 'Yes' : 'No' }}</td>
+                <td>{{ type.nombre }}</td>
+                <td>
+                    <a href="{{ path('app_type_showb', {'id': type.id}) }}">show</a>
+                    <a href="{{ path('app_type_edit', {'id': type.id}) }}">edit</a>
+                   
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('app_type_new') }}">Create new</a>
+
+   
+{% endblock %}

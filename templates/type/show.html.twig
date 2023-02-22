@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Type{% endblock %}
+
+{% block body %}
+    <h1>Type</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ type.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ type.nom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ type.description }}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ type.etat ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ type.nombre }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_type_frt') }}">back to list</a>
+
+   
+
+{% endblock %}
