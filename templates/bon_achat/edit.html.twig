@@ -1,0 +1,13 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Edit BonAchat{% endblock %}
+
+{% block body %}
+    <h1>Edit BonAchat</h1>
+
+    {{ include('bon_achat/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_bon_achat_index') }}">back to list</a>
+
+    {{ include('bon_achat/_delete_form.html.twig') }}
+{% endblock %}

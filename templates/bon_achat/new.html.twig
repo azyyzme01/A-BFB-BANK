@@ -1,0 +1,11 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}New BonAchat{% endblock %}
+
+{% block body %}
+    <h1>Create new BonAchat</h1>
+
+    {{ include('bon_achat/_form.html.twig') }}
+
+    <a href="{{ path('app_bon_achat_index') }}">back to list</a>
+{% endblock %}

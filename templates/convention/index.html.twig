@@ -1,0 +1,47 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Convention index{% endblock %}
+
+{% block body %}
+    <h1>Convention index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name Convention</th>
+                <th>Domaine</th>
+                <th>Email Convention</th>
+                <th>Telephone conv</th>
+
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for convention in conventions %}
+            <tr>
+                <td>{{ convention.id }}</td>
+                <td>{{ convention.nameConv }}</td>
+                <td>{{ convention.domaine }}</td>
+                <td>{{ convention.emailConv }}</td>
+                <td>{{ convention.telConv }}</td>
+
+
+                <td>
+                    <a href="{{ path('app_convention_show', {'id': convention.id}) }}">show</a>
+                    <a href="{{ path('app_convention_edit', {'id': convention.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_convention_new') }}">Create new</a>
+
+
+
+  {% endblock %}

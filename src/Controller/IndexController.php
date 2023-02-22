@@ -15,5 +15,4 @@ class IndexController extends AbstractController
             'controller_name' => 'IndexController',
         ]);
     }
-
 }

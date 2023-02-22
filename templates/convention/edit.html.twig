@@ -1,0 +1,13 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Edit Convention{% endblock %}
+
+{% block body %}
+    <h1>Edit Convention</h1>
+
+    {{ include('convention/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_convention_index') }}">back to list</a>
+
+    {{ include('convention/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}BonAchat index{% endblock %}
+
+{% block body %}
+    <h1>BonAchat index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Montant</th>
+                <th>Date d'expiration</th>
+                <th>Description</th>*
+                <th>convention</th>
+
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bon_achat in bon_achats %}
+            <tr>
+                <td>{{ bon_achat.id }}</td>
+                <td>{{ bon_achat.montant }}</td>
+                <td>{{ bon_achat.dateExp ? bon_achat.dateExp|date('Y-m-d') : '' }}</td>
+                <td>{{ bon_achat.description }}</td>
+                <td>{{ bon_achat.convention }}</td>
+                <td>
+                    <a href="{{ path('app_bon_achat_show', {'id': bon_achat.id}) }}">show</a>
+                    <a href="{{ path('app_bon_achat_edit', {'id': bon_achat.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_bon_achat_new') }}">Create new</a>
+{% endblock %}

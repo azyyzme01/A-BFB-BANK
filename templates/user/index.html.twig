@@ -1,172 +1,26 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-back.html.twig' %}
 
 {% block title %}Hello UserController!{% endblock %}
 
 {% block body %}
-    <style>
-        .inf-content {
-            border: 1px solid #DDDDDD;
-            -webkit-border-radius: 10px;
-            -moz-border-radius: 10px;
-            border-radius: 10px;
-            box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);
-        }
-        .bn30 {
-            border: 5em;
-            cursor: pointer;
-            outline: none;
-            font-size: 16px;
-            -webkit-transform: translate(0);
-            transform: translate(0);
-            background-image: linear-gradient(45deg, #4568dc, #b06ab3);
-            padding: 0.7em 2em;
-            border-radius: 65px;
-            box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.438);
-            -webkit-transition: box-shadow 0.25s;
-            transition: box-shadow 0.25s;
-            color: white;
-        }
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
 
-        .bn30 .text {
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-image: linear-gradient(45deg, #4568dc, #b06ab3);
-        }
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! njhjkghukjjbjkgjètkuyhghbnj,lkjhgfd
+        kjhgfds
+        lkjhgfds
+        okijhgfd
+        lkjhgfd
+        lkjhgfd
+        mlkjhg✅</h1>
 
-        .bn30:after {
-            content: "";
-            border-radius: 18px;
-            position: absolute;
-            margin: 4px;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            z-index: -1;
-            background: #0e0e10;
-        }
-
-        .bn30:hover {
-            background-image: linear-gradient(-45deg, #4568dc, #b06ab3);
-            box-shadow: 0 12px 24px rgba(128, 128, 128, 0.1);
-        }
-
-        .bn30:hover .text {
-            background-image: linear-gradient(-45deg, #4568dc, #b06ab3);
-        }
-    </style>
-
-    <div class="container bootstrap snippets bootdey">
-        <div class="panel-body inf-content">
-            <div class="row">
-                <div class="col-md-4">
-                    <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario">
-                    <ul title="Ratings" class="list-inline ratings text-center">
-                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-                    </ul>
-                </div>
-                <div class="col-md-6">
-                    <strong>Information</strong><br>
-                    <div class="table-responsive">
-                        <table class="table table-user-information">
-                            <tbody>
-                            {% for user in users %}
-                                {% if app.user.id== user.id%}
-
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span class="glyphicon glyphicon-asterisk text-primary"></span>
-                                        Id
-                                    </strong>
-                                </td>
-                                <td class="text-primary">
-                                    {{ user.id }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span class="glyphicon glyphicon-bookmark text-primary"></span>
-                                        Nom
-                                    </strong>
-                                </td>
-                                <td class="text-primary">
-                                    {{ user.name }}
-                                </td>
-                            </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>
-                                                <span class="glyphicon glyphicon-bookmark text-primary"></span>
-                                                Prénom
-                                            </strong>
-                                        </td>
-                                        <td class="text-primary">
-                                            {{ user.prenomc }}
-                                        </td>
-                                    </tr>
-
-
-                                    <tr>
-                                        <td>
-                                            <strong>
-                                                <span class="glyphicon glyphicon-bookmark text-primary"></span>
-                                                Numéro de téléphone
-                                            </strong>
-                                        </td>
-                                        <td class="text-primary">
-                                            {{ user.NumTel }}
-                                        </td>
-                                    </tr>
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span class="glyphicon glyphicon-envelope text-primary"></span>
-                                        Email
-                                    </strong>
-                                </td>
-                                <td class="text-primary">
-                                    {{ user.email }}
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <strong>
-                                        <span class="glyphicon glyphicon-bookmark text-primary"></span>
-                                        Ville
-                                    </strong>
-                                </td>
-                                <td class="text-primary">
-                                    {{ user.city }}
-                                </td>
-
-                            </tr>
-
-
-
-
-
-
-
-
-                            </tbody>
-
-
-                        </table>
-                        <a href="{{ path ('app_front_edit', {'id': user.id}) }}"><button class="bn30">Modifier</button></a>
-
-                        {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ 'C:/Users/Azyyzme01/Desktop/PI/3awedd/BANK/src/Controller/UserController.php'|file_link(0) }}">src/Controller/UserController.php</a></code></li>
+        <li>Your template at <code><a href="{{ 'C:/Users/Azyyzme01/Desktop/PI/3awedd/BANK/templates/user/index.html.twig'|file_link(0) }}">templates/user/index.html.twig</a></code></li>
+    </ul>
+</div>
 {% endblock %}
