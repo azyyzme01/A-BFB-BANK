@@ -57,7 +57,8 @@ class Comptebancaire
     #[Assert\Positive(message:"solde doit etre positif")]
     private ?float $solde_initial = null;
 
-    #[ORM\OneToMany(mappedBy: 'compte_source', targetEntity: Transaction::class)]
+    #[ORM\OneToMany(mappedBy: 'compte_source',orphanRemoval:true ,cascade:["persist","remove"], targetEntity: Transaction::class)]
+    #[ORM\Joincolumn(onDelete:"SET NULL")]
     private Collection $transactions;
 
     public function __construct()
