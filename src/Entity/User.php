@@ -7,7 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -16,6 +18,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("User")]
     private ?int $id = null;
 
 
@@ -24,21 +27,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Email(
         message: "The email '{{ value }}' is not a valid email."
     )]
+    #[Groups("User")]
     private ?string $email = null;
 
     #[ORM\Column]
+    #[Groups("User")]
     private array $roles = [];
 
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Groups("User")]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("User")]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("User")]
     private ?string $city = null;
 
     #[ORM\Column]
@@ -49,10 +57,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: "Your telephone must be 8 numbers",
         maxMessage: "Your telephone must be 8 numbers"
     )]
+    #[Groups("User")]
     private ?int $num_tel = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
+    #[Groups("User")]
     private ?string $prenomc = null;
 
     public function getId(): ?int
