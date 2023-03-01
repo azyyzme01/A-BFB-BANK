@@ -9,3 +9,7 @@ bank_get_qr_code:
     requirements:
         Id: '\d+'
 
+exporter_proprietaire_pdf:
+    path: '/proprietaire/{id}/exporter-pdf'
+    controller: 'App\Controller\ComptebancaireController::exporterPdf'
+

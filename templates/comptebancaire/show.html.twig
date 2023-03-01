@@ -54,6 +54,7 @@
 
     <a class="bn60" href="{{ path('app_comptebancaire_index') }}">back to list</a>
     <a href="{{ path('bank_get_qr_code', {'Id': comptebancaire.id}) }}" target="_blank">Obtenir le code QR</a>
+    <a href="{{ path('exporter_proprietaire_pdf', { 'id': comptebancaire.id }) }}">Export PDF</a>
 
     
 

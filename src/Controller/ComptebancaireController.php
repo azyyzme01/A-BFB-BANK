@@ -6,6 +6,9 @@ use Endroid\QrCodeBundle\Response\QrCodeResponse;
 use Endroid\QrCode\Writer\PngWriter;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 use App\Entity\Comptebancaire;
 use App\Form\ComptebancaireType;
 use App\Repository\ComptebancaireRepository;
@@ -107,6 +110,33 @@ class ComptebancaireController extends AbstractController
              'qr_code.png'
          ));
  
+
+        return $response;
+    }
+
+    public function exporterPdf($id)
+    {
+        // Récupérez les informations du propriétaire à partir de la base de données
+        $proprietaire = $this->getDoctrine()->getRepository(Comptebancaire::class)->find($id);
+
+        // Générez la vue Twig avec les informations du propriétaire
+        $html = $this->renderView('comptebancaire/proprietaire_pdf.html.twig', [
+            'proprietaire' => $proprietaire,
+        ]);
+
+        // Configurez les options de Dompdf
+        $options = new Options();
+        $options->set('defaultFont', 'Arial');
+
+        // Générez le PDF
+        $dompdf = new Dompdf($options);
+        $dompdf->loadHtml($html);
+        $dompdf->render();
+
+        // Renvoyez le PDF en tant que réponse HTTP
+        $response = new Response($dompdf->output());
+        $response->headers->set('Content-Type', 'application/pdf');
+        $response->headers->set('Content-Disposition', 'attachment; filename="proprietaire.pdf"');
 
         return $response;
     }
