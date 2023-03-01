@@ -1,0 +1,41 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+
+    <hr>
+    <a href="{{ path('app_front_index') }}"><i class="bi bi-arrow-left-circle-fill" style="height: 50px ; width: 50px"> </i></a>
+
+    <h1>User</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">email</th>
+            <th scope="col">role</th>
+            <th scope="col">password</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">{{ user.id }}</th>
+            <td>{{ user.email }}</td>
+            <td>{{ user.roles ? user.roles|json_encode : '' }} }}</td>
+            <td>{{ user.password }}</td>
+
+        </tr>
+
+        </tbody>
+    </table>
+    <!-- End Default Table Example -->
+    </div>
+    </div>
+
+
+
+
+
+{% endblock %}
