@@ -1,6 +1,10 @@
 <?php
 
 namespace App\Controller;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCodeBundle\Response\QrCodeResponse;
+use Endroid\QrCode\Writer\PngWriter;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 use App\Entity\Comptebancaire;
 use App\Form\ComptebancaireType;
@@ -77,5 +81,33 @@ class ComptebancaireController extends AbstractController
         }
 
         return $this->redirectToRoute('app_comptebancaireback_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    public function getQrCodeForAccount(int $Id): Response
+    {
+        // Récupérer les informations du compte bancaire à partir de la base de données
+        $bankAccount = $this->getDoctrine()->getRepository(Comptebancaire::class)->find($Id);
+
+        if (!$bankAccount) {
+            throw $this->createNotFoundException('Le compte bancaire n\'existe pas');
+        }
+
+        // Générer le code QR à partir des informations du compte bancaire
+        $qrCode = new QrCode($bankAccount->getNom());
+        $qrCode->setSize(300);
+        $qrCode->setMargin(10);
+
+        $pngWriter = new PngWriter();
+        $qrCodeResult = $pngWriter->write($qrCode);
+
+         // Générer la réponse HTTP contenant le code QR
+         $response = new QrCodeResponse($qrCodeResult);
+         $response->headers->set('Content-Disposition', $response->headers->makeDisposition(
+             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+             'qr_code.png'
+         ));
+ 
+
+        return $response;
     }
 }

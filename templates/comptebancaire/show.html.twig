@@ -48,10 +48,15 @@
                 <th>Solde_initial</th>
                 <td>{{ comptebancaire.soldeInitial }}</td>
             </tr>
+            
         </tbody>
     </table>
 
     <a class="bn60" href="{{ path('app_comptebancaire_index') }}">back to list</a>
+    <a href="{{ path('bank_get_qr_code', {'Id': comptebancaire.id}) }}" target="_blank">Obtenir le code QR</a>
+
+    
+
     
 
    

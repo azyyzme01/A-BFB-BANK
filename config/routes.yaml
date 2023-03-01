@@ -1,3 +1,11 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+bank_get_qr_code:
+    path: '/bank/account/{Id}/qrcode'
+    controller: 'App\Controller\ComptebancaireController::getQrCodeForAccount'
+    methods: ['GET']
+    requirements:
+        Id: '\d+'
+
