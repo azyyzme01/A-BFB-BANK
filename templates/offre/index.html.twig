@@ -3,6 +3,7 @@
 {% block title %}Offre index{% endblock %}
 
 {% block body %}
+<<<<<<< HEAD
 
    
 <style>
@@ -22,6 +23,8 @@
   width: 100px;
 }
 </style>
+=======
+>>>>>>> ba85304107831b3acd7bbc56141d72ddff22ce70
     <h1>Offre index</h1>
 
     <table class="table">
@@ -46,7 +49,11 @@
                 <td>{{ offre.dateExpiration ? offre.dateExpiration|date('Y-m-d') : '' }}</td>
                 <td>{{ offre.tarif }}</td>
                 <td>
+<<<<<<< HEAD
                     <a  class="bn60" href="{{ path('app_offre_show', {'id': offre.id}) }}">show</a>
+=======
+                    <a href="{{ path('app_offre_show', {'id': offre.id}) }}">show</a>
+>>>>>>> ba85304107831b3acd7bbc56141d72ddff22ce70
                 </td>
             </tr>
         {% else %}
@@ -56,6 +63,7 @@
         {% endfor %}
         </tbody>
     </table>
+<<<<<<< HEAD
     <style>
 
         .t1{
@@ -73,6 +81,8 @@
         }
             </style>
            
+=======
+>>>>>>> ba85304107831b3acd7bbc56141d72ddff22ce70
     
     
 {% endblock %}

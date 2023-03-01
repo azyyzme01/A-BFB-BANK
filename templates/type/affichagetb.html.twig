@@ -3,6 +3,7 @@
 {% block title %}Type index{% endblock %}
 
 {% block body %}
+<<<<<<< HEAD
 <style>
     .bn60 {
   background-color: #190c8d;
@@ -20,6 +21,8 @@
   width: 100px;
 }
 </style>
+=======
+>>>>>>> ba85304107831b3acd7bbc56141d72ddff22ce70
     <h1>Type index</h1>
 
     <table class="table">
@@ -42,7 +45,11 @@
                 <td>{{ type.etat ? 'Yes' : 'No' }}</td>
                 <td>{{ type.nombre }}</td>
                 <td>
+<<<<<<< HEAD
                     <a class="bn60"  href="{{ path('app_type_show', {'id': type.id}) }}">show</a>
+=======
+                    <a href="{{ path('app_type_show', {'id': type.id}) }}">show</a>
+>>>>>>> ba85304107831b3acd7bbc56141d72ddff22ce70
                     
                    
                 </td>
@@ -54,6 +61,7 @@
         {% endfor %}
         </tbody>
     </table>
+<<<<<<< HEAD
     <style>
 
         .t1{
@@ -70,6 +78,8 @@
             font-weight: bold;
         }
             </style>
+=======
+>>>>>>> ba85304107831b3acd7bbc56141d72ddff22ce70
    
 
    

@@ -3,6 +3,7 @@
 {% block title %}Offre{% endblock %}
 
 {% block body %}
+<<<<<<< HEAD
 <style>
     .bn60 {
   background-color: #190c8d;
@@ -20,6 +21,8 @@
   width: 100px;
 }
 </style>
+=======
+>>>>>>> ba85304107831b3acd7bbc56141d72ddff22ce70
     <h1>Offre</h1>
 
     <table class="table">
@@ -51,10 +54,17 @@
         </tbody>
     </table>
 
+<<<<<<< HEAD
     <a class="bn60" href="{{ path('app_offreback_index') }}">back to list</a>
     
 
     <a  class="bn60" href="{{ path('app_offre_edit', {'id': offre.id}) }}">edit</a>
+=======
+    <a href="{{ path('app_offreback_index') }}">back to list</a>
+    
+
+    <a href="{{ path('app_offre_edit', {'id': offre.id}) }}">edit</a>
+>>>>>>> ba85304107831b3acd7bbc56141d72ddff22ce70
 
     {{ include('offre/_delete_form.html.twig') }}
 {% endblock %}
