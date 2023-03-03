@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Offre{% endblock %}
+
+{% block body %}
+    <h1>Offre</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ offre.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ offre.nom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ offre.description }}</td>
+            </tr>
+            <tr>
+                <th>Date_ouverture</th>
+                <td>{{ offre.dateOuverture ? offre.dateOuverture|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_expiration</th>
+                <td>{{ offre.dateExpiration ? offre.dateExpiration|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Tarif</th>
+                <td>{{ offre.tarif }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_type_frt') }}">back to list</a>
+    
+
+  
+
+  
+{% endblock %}

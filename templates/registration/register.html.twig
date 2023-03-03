@@ -1,0 +1,73 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Hello InscriptionController!{% endblock %}
+
+{% block body %}
+    <hr>
+<div class="col-lg-6">
+
+    <div class="card">
+        <div class="card-body">
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+            <h5 class="card-title">Inscription</h5>
+
+            <!-- Vertical Form -->
+            <div class="col-12">
+                <label for="inputAddress" class="form-label">Nom</label>
+                {{ form_widget(form.name, {'attr': {'class':'form-control'}}) }}
+                <span style="color:red"> {{ form_errors(form.name) }}</span>
+            </div>
+
+
+            <div class="col-12">
+                <label for="inputAddress" class="form-label">Prénom</label>
+                {{ form_widget(form.prenomc, {'attr': {'class':'form-control'}}) }}
+                <span style="color:red"> {{ form_errors(form.prenomc) }}</span>
+            </div>
+
+            <div class="col-12">
+                <label for="inputAddress" class="form-label">Numéro de téléphone</label>
+                {{ form_widget(form.num_tel, {'attr': {'class':'form-control'}}) }}
+                <span style="color:red"> {{ form_errors(form.num_tel) }}</span>
+            </div>
+
+
+
+                <div class="col-12">
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email, {'attr': {'class':'form-control'}}) }}
+                    <span style="color:red"> {{ form_errors(form.email) }}</span>
+                </div>
+
+
+
+
+                <div class="col-12">
+                    <label for="inputAddress" class="form-label">Password</label>
+                    {{ form_widget(form.plainPassword, {'attr': {'class':'form-control'}}) }}
+                    <span style="color:red"> {{ form_errors(form.plainPassword) }}</span>
+                </div>
+
+
+
+
+            <label for="inputAddress" class="form-label">city</label>
+            {{ form_widget(form.city, {'attr': {'class':'form-control'}}) }}
+            <span style="color:red"> {{ form_errors(form.city) }}</span>
+
+
+
+            <label for="inputAddress" class="form-label">agree Terms</label>
+            {{ form_widget(form.agreeTerms) }}
+            <span style="color:red"> {{ form_errors(form.agreeTerms) }}</span>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+
+        </div>
+    </div>
+</div>
+    {{ form_end(form) }}
+    {% endblock %}

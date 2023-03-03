@@ -1,0 +1,88 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Offre index
+
+{% endblock %}
+
+
+{% block body %}
+
+<style>
+    .bn60 {
+  background-color: #190c8d;
+  color: #ffffff;
+  font-size: 1.3em;
+  font-weight: 400;
+  position: relative;
+  outline: none;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 55px;
+  width: 100px;
+}
+</style>
+
+    <h1>Offre index</h1>
+  
+
+
+    <table class="table">
+        {% for message in app.flashes('info')%}
+        <div class="alert alert-danger">
+        {{message}}
+        {% endfor %}
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Date_ouverture</th>
+                <th>Date_expiration</th>
+                <th>Tarif</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for offre in offres %}
+            <tr>
+                <td>{{ offre.id }}</td>
+                <td>{{ offre.nom }}</td>
+                <td>{{ offre.description }}</td>
+                <td>{{ offre.dateOuverture ? offre.dateOuverture|date('Y-m-d') : '' }}</td>
+                <td>{{ offre.dateExpiration ? offre.dateExpiration|date('Y-m-d') : '' }}</td>
+                <td>{{ offre.tarif }}</td>
+                <td>
+                    <a class="bn60" href="{{ path('app_offreback_show', {'id': offre.id}) }}">show</a>
+                    <a   class="bn60"  href="{{ path('app_offreback_edit', {'id': offre.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="bn60" href="{{ path('app_offreback_new') }}">Create new</a>
+    <style>
+
+        .t1{
+         border-collapse: collapse;
+         width: 1000px;
+         margin-bottom: 400px;
+        }
+        th,td {
+            border: 1px solid black;
+            padding: 70px;
+        }
+        caption{
+            background-color: lightblue;
+            font-weight: bold;
+        }
+            </style>
+           
+{% endblock %}
