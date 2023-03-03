@@ -14,6 +14,11 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\User;
+
+
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class AuthAuthentificatorAuthenticator extends AbstractLoginFormAuthenticator
 {
@@ -21,16 +26,48 @@ class AuthAuthentificatorAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'app_index';
 
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
+   /* public function __construct(private UrlGeneratorInterface $urlGenerator)
     {
-    }
+    }*/
+    private $entityManager;
+    private $router;
 
-    public function authenticate(Request $request): Passport
+    public function __construct(EntityManagerInterface $entityManager,private UrlGeneratorInterface $urlGenerator)
+    {
+        $this->entityManager = $entityManager;
+    }
+   /* public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email', '');
 
         $request->getSession()->set(Security::LAST_USERNAME, $email);
 
+        return new Passport(
+            new UserBadge($email),
+            new PasswordCredentials($request->request->get('password', '')),
+            [
+                new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
+            ]
+        );
+    }*/
+
+    public function authenticate(Request $request): Passport
+    {
+        $email = $request->request->get('email', '');
+        $request->getSession()->set(Security::LAST_USERNAME, $email);
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
+
+        $request->getSession()->set(Security::LAST_USERNAME, $email);
+        // if (!$user || !$user->isIsActive()) {
+        //     throw new AuthenticationException('Invalid credentials.');
+        // }
+        if($user){
+            $disabledUntil = $user->getDisabledUntil();
+
+            if ($disabledUntil && $disabledUntil > new \DateTime() && !$user->isIsActive()) {
+                throw new AuthenticationException(sprintf('Your account has been disabled. Please try again in %d seconds.', $disabledUntil->getTimestamp() - time()));
+            }
+        }
         return new Passport(
             new UserBadge($email),
             new PasswordCredentials($request->request->get('password', '')),

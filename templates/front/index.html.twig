@@ -165,6 +165,8 @@
                         <th>Email</th>
                         <th>City</th>
                         <th>actions</th>
+                        <th>Activer</th>
+                        <th>Bloquer</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -176,11 +178,15 @@
                         <td>{{ user.NumTel}}</td>
                         <td>{{ user.email }}</td>
                         <td>{{ user.City}}</td>
+                        <td>{{ user.isActive}}</td>
+
 
                         <td>
                             <a href="{{ path('app_front_show', {'id': user.id}) }}" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
                             {{ include('front/_delete_form.html.twig') }}
                         </td>
+                        <td><a href="/user/{{user.id}}/enable" class="btn btn-success" >Activer</a></td>
+                        <td><a href="/user/{{user.id}}/disable" class="btn btn-danger" >Bloquer</a></td>
                     </tr>
                     {% else %}
                         <tr>

@@ -139,6 +139,7 @@
                         <button class="btn signin-btn" type="submit">
                             Sign in
                         </button>
+
                     </div>
                     <input type="hidden" name="_csrf_token"
                            value="{{ csrf_token('authenticate') }}"
@@ -147,7 +148,7 @@
 
             </div>
             <div class="modal-footer footer-box">
-                <a href="#">Forgot password ?</a>
+                <a href="{{ path('app_forgot_password_request') }}">Forgot password ?</a>
             </div>
         </div>
         {% endblock %}

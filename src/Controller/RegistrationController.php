@@ -60,7 +60,7 @@ class RegistrationController extends AbstractController
         }
 
         return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 
@@ -83,4 +83,37 @@ class RegistrationController extends AbstractController
 
         return $this->redirectToRoute('app_register');
     }
+
+    /**
+     * @Route("/user/{id}/enable", name="user_enable")
+     */
+    public function enableUser(User $user): Response
+    {
+        $user->setisActive(true);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_front_index');
+    }
+
+    /**
+     * @Route("/user/{id}/disable", name="user_disable")
+     */
+    public function disableUser(User $user): Response
+    {
+        $user->setisActive(0);
+        $now = new \DateTime();
+        $disabledUntil = clone $now;
+        $disabledUntil->modify('+2 minute');
+
+        $user->setDisabledUntil($disabledUntil);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_front_index');
+    }
+
 }
