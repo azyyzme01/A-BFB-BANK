@@ -1,5 +1,9 @@
 {% extends 'base-back.html.twig' %}
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 6e16bf4008d740d51f92a8d8664babcdb5e1be4b
 {% block title %}Offre index
 
 {% endblock %}
@@ -34,6 +38,17 @@
         <div class="alert alert-danger">
         {{message}}
         {% endfor %}
+<<<<<<< HEAD
+=======
+=======
+{% block title %}Offre index{% endblock %}
+
+{% block body %}
+    <h1>Offre index</h1>
+
+    <table class="table">
+>>>>>>> ba85304107831b3acd7bbc56141d72ddff22ce70
+>>>>>>> 6e16bf4008d740d51f92a8d8664babcdb5e1be4b
         <thead>
             <tr>
                 <th>Id</th>
@@ -55,8 +70,18 @@
                 <td>{{ offre.dateExpiration ? offre.dateExpiration|date('Y-m-d') : '' }}</td>
                 <td>{{ offre.tarif }}</td>
                 <td>
+<<<<<<< HEAD
                     <a class="bn60" href="{{ path('app_offreback_show', {'id': offre.id}) }}">show</a>
                     <a   class="bn60"  href="{{ path('app_offreback_edit', {'id': offre.id}) }}">edit</a>
+=======
+<<<<<<< HEAD
+                    <a class="bn60" href="{{ path('app_offreback_show', {'id': offre.id}) }}">show</a>
+                    <a   class="bn60"  href="{{ path('app_offreback_edit', {'id': offre.id}) }}">edit</a>
+=======
+                    <a href="{{ path('app_offreback_show', {'id': offre.id}) }}">show</a>
+                    <a href="{{ path('app_offreback_edit', {'id': offre.id}) }}">edit</a>
+>>>>>>> ba85304107831b3acd7bbc56141d72ddff22ce70
+>>>>>>> 6e16bf4008d740d51f92a8d8664babcdb5e1be4b
                 </td>
             </tr>
         {% else %}
@@ -67,6 +92,10 @@
         </tbody>
     </table>
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 6e16bf4008d740d51f92a8d8664babcdb5e1be4b
     <a class="bn60" href="{{ path('app_offreback_new') }}">Create new</a>
     <style>
 
@@ -85,4 +114,10 @@
         }
             </style>
            
+<<<<<<< HEAD
+=======
+=======
+    <a href="{{ path('app_offreback_new') }}">Create new</a>
+>>>>>>> ba85304107831b3acd7bbc56141d72ddff22ce70
+>>>>>>> 6e16bf4008d740d51f92a8d8664babcdb5e1be4b
 {% endblock %}

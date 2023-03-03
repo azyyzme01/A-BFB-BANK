@@ -10,7 +10,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> ba85304107831b3acd7bbc56141d72ddff22ce70
+>>>>>>> 6e16bf4008d740d51f92a8d8664babcdb5e1be4b
 #[Route('/type')]
 class TypeController extends AbstractController
 {

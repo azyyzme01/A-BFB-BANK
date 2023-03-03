@@ -9,8 +9,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+<<<<<<< HEAD
 //use Knp\Component\Pager\PaginatorInterface;
 
+=======
+<<<<<<< HEAD
+//use Knp\Component\Pager\PaginatorInterface;
+
+=======
+>>>>>>> ba85304107831b3acd7bbc56141d72ddff22ce70
+>>>>>>> 6e16bf4008d740d51f92a8d8664babcdb5e1be4b
 
 #[Route('/offre')]
 class OffreController extends AbstractController
@@ -24,6 +32,10 @@ class OffreController extends AbstractController
     }
 
     #[Route('/affichagef', name: 'app_offrf_index', methods: ['GET'])]
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 6e16bf4008d740d51f92a8d8664babcdb5e1be4b
     public function indexf( OffreRepository $offreRepository): Response
     {
        // $offreRepository = $paginator->paginate(
@@ -35,6 +47,13 @@ class OffreController extends AbstractController
          
     
 
+<<<<<<< HEAD
+=======
+=======
+    public function indexf(OffreRepository $offreRepository): Response
+    {
+>>>>>>> ba85304107831b3acd7bbc56141d72ddff22ce70
+>>>>>>> 6e16bf4008d740d51f92a8d8664babcdb5e1be4b
         return $this->render('offre/frontAFF.html.twig', [
             'offres' => $offreRepository->findAll(),
         ]);
