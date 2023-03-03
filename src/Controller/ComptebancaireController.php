@@ -19,6 +19,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route('/comptebancaire')]
 class ComptebancaireController extends AbstractController
@@ -29,6 +32,25 @@ class ComptebancaireController extends AbstractController
         return $this->render('comptebancaire/index.html.twig', [
             'comptebancaires' => $comptebancaireRepository->findAll(),
         ]);
+    }
+
+    #[Route("/Allcompte", name: "list")]
+    //* Dans cette fonction, nous utilisons les services NormlizeInterface et StudentRepository, 
+    //* avec la méthode d'injection de dépendances.
+    public function getCompte(ComptebancaireRepository $repo, SerializerInterface $serializer)
+    {
+        $comptes = $repo->findAll();
+        //* Nous utilisons la fonction normalize qui transforme le tableau d'objets 
+        //* students en  tableau associatif simple.
+        // $studentsNormalises = $normalizer->normalize($students, 'json', ['groups' => "students"]);
+
+        // //* Nous utilisons la fonction json_encode pour transformer un tableau associatif en format JSON
+        // $json = json_encode($studentsNormalises);
+
+        $json = $serializer->serialize($comptes, 'json', ['groups' => "comptes"]);
+
+        //* Nous renvoyons une réponse Http qui prend en paramètre un tableau en format JSON
+        return new Response($json);
     }
 
     #[Route('/new', name: 'app_comptebancaire_new', methods: ['GET', 'POST'])]
@@ -48,6 +70,32 @@ class ComptebancaireController extends AbstractController
             'comptebancaire' => $comptebancaire,
             'form' => $form,
         ]);
+    }
+
+    #[Route("/comptes/{id}", name: "comptes")]
+    public function comptesId($id, NormalizerInterface $normalizer, ComptebancaireRepository $repo)
+    {
+        $comptes = $repo->find($id);
+        $comptesNormalises = $normalizer->normalize($comptes, 'json', ['groups' => "comptes"]);
+        return new Response(json_encode($comptesNormalises));
+    }
+
+    #[Route("addcomptesJSON", name: "addScomptesJSON")]
+    public function addcomotesJSON(Request $req,   NormalizerInterface $Normalizer)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $comptes = new Comptebancaire();
+        $comptes->setNom($req->get('nom'));
+        $comptes->setPrenom($req->get('prenom'));
+        $comptes->setEmail($req->get('email'));
+        $comptes->setNumTlfn($req->get('num_tlfn'));
+        $comptes->setSoldeInitial($req->get('solde_initial'));
+        $em->persist($comptes);
+        $em->flush();
+
+        $jsonContent = $Normalizer->normalize($comptes, 'json', ['groups' => 'comptes']);
+        return new Response(json_encode($jsonContent));
     }
 
     #[Route('/{id}', name: 'app_comptebancaire_show', methods: ['GET'])]
@@ -74,6 +122,36 @@ class ComptebancaireController extends AbstractController
             'comptebancaire' => $comptebancaire,
             'form' => $form,
         ]);
+    }
+
+    #[Route("updatecomptesJSON/{id}", name: "updatecomptesJSON")]
+    public function updatecomptesJSON(Request $req, $id, NormalizerInterface $Normalizer)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $comptes = $em->getRepository(Comptebancaire::class)->find($id);
+        $comptes->setNom($req->get('nom'));
+        $comptes->setPrenom($req->get('prenom'));
+        $comptes->setEmail($req->get('email'));
+        $comptes->setNumTlfn($req->get('num_tlfn'));
+        $comptes->setSoldeInitial($req->get('solde_initial'));
+
+        $em->flush();
+
+        $jsonContent = $Normalizer->normalize($comptes, 'json', ['groups' => 'comptes']);
+        return new Response("compte updated successfully " . json_encode($jsonContent));
+    }
+
+    #[Route("deletecomptesJSON/{id}", name: "deletecomptesJSON")]
+    public function deletecomptesJSON(Request $req, $id, NormalizerInterface $Normalizer)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $comptes = $em->getRepository(Comptebancaire::class)->find($id);
+        $em->remove($comptes);
+        $em->flush();
+        $jsonContent = $Normalizer->normalize($comptes, 'json', ['groups' => 'comptes']);
+        return new Response("compte deleted successfully " . json_encode($jsonContent));
     }
 
     #[Route('/{id}', name: 'app_comptebancaire_delete', methods: ['POST'])]

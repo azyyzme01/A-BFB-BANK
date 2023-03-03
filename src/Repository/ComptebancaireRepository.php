@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Comptebancaire;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @extends ServiceEntityRepository<Comptebancaire>

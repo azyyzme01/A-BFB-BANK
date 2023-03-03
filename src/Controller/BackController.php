@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Comptebancaire;
 use App\Form\ComptebancaireType;
 use App\Repository\ComptebancaireRepository;
@@ -128,4 +128,41 @@ class BackController extends AbstractController
             'form' => $form,
         ]);
     }
+
+
+        /**
+     * @Route("/sort", name="bank_account_sort")
+     */
+    public function sort(ComptebancaireRepository $repository, EntityManagerInterface $entityManager)
+    {
+        // Créer une instance de QueryBuilder
+        $qb = $repository->createQueryBuilder('ba');
+
+        // Ajouter l'ordre de tri
+        $qb->orderBy('ba.solde_initial', 'DESC');
+
+        // Exécuter la requête
+        $comptebancaire = $qb->getQuery()->getResult();
+
+        // Modifier les comptes bancaires en base de données
+       // foreach ($bankAccounts as $comptebancaire) {
+            // Modifier le compte bancaire, par exemple ajouter un pourcentage d'intérêt
+           // $newBalance = $comptebancaire->getBalance() * 1.02;
+          //  $comptebancaire->setBalance($newBalance);
+
+            // Enregistrer le compte bancaire modifié en base de données
+          //  $entityManager->persist($comptebancaire);
+       // }
+
+        $entityManager->flush();
+
+        // Afficher la liste triée des comptes bancaires
+        return $this->renderForm('comptebancaire/indexback.html.twig', [
+            'comptebancaires' => $comptebancaire,
+            //'form' => $form,
+        ]);
+            
+        
+    }
+
 }

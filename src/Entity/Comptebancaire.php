@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 #[ORM\Entity(repositoryClass: ComptebancaireRepository::class)]
@@ -15,9 +16,11 @@ class Comptebancaire
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("comptes")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("comptes")]
     #[Assert\Length(
         min: 3,
         max: 10,
@@ -28,6 +31,7 @@ class Comptebancaire
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("comptes")]
     #[Assert\NotBlank(message:"NSC is required")]
     #[Assert\Length(
         min: 3,
@@ -38,11 +42,13 @@ class Comptebancaire
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("comptes")]
     #[Assert\NotBlank(message:"NSC is required")]
     #[Assert\Email(message:"email invalid")]
     private ?string $email = null;
 
     #[ORM\Column]
+    #[Groups("comptes")]
     #[Assert\NotBlank(message:"NSC is required")]
     #[Assert\Length(
         min: 8,
@@ -53,12 +59,14 @@ class Comptebancaire
     private ?int $num_tlfn = null;
 
     #[ORM\Column]
+    #[Groups("comptes")]
     #[Assert\NotBlank(message:"NSC is required")]
     #[Assert\Positive(message:"solde doit etre positif")]
     private ?float $solde_initial = null;
 
     #[ORM\OneToMany(mappedBy: 'compte_source',orphanRemoval:true ,cascade:["persist","remove"], targetEntity: Transaction::class)]
     #[ORM\Joincolumn(onDelete:"SET NULL")]
+    #[Groups("comptes")]
     private Collection $transactions;
 
     public function __construct()
