@@ -13,7 +13,6 @@ class Offre
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-<<<<<<< HEAD
     #[Groups("Offre")]
     private ?int $id = null;
    
@@ -23,29 +22,15 @@ class Offre
 
     #[ORM\Column(length: 255)]
     #[Groups("Offre")]
-=======
-    private ?int $id = null;
-   
-    #[ORM\Column(length: 255)]
-    private ?string $nom = null;
-
-    #[ORM\Column(length: 255)]
->>>>>>> 6e16bf4008d740d51f92a8d8664babcdb5e1be4b
     private ?string $description = null;
     
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Assert\GreaterThanOrEqual("today")]
-<<<<<<< HEAD
     #[Groups("Offre")]
     private ?\DateTimeInterface $date_ouverture = null;
     #[Assert\GreaterThanOrEqual("today")]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Groups("Offre")]
-=======
-    private ?\DateTimeInterface $date_ouverture = null;
-    #[Assert\GreaterThanOrEqual("today")]
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
->>>>>>> 6e16bf4008d740d51f92a8d8664babcdb5e1be4b
     private ?\DateTimeInterface $date_expiration = null;
 
     

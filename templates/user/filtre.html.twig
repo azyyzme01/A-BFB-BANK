@@ -1,0 +1,17 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Offres par type{% endblock %}
+
+{% block body %}
+    <h1>Offres par type : {{ type.nom }}</h1>
+
+    {% if offres is empty %}
+        <p>Aucune offre trouvée pour ce type.</p>
+    {% else %}
+        <ul>
+            {% for offre in offres %}
+                <li>{{ offre.nom }} - {{ offre.description }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

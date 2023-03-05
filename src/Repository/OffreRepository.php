@@ -39,6 +39,16 @@ class OffreRepository extends ServiceEntityRepository
         }
     }
 
+    public function searchByTerm(string $term): array
+{
+    return $this->createQueryBuilder('o')
+        ->where('o.nom LIKE :term OR o.description LIKE :term')
+        ->setParameter('term', '%' . $term . '%')
+        ->getQuery()
+        ->getResult();
+}
+   
+
 //    /**
 //     * @return Offre[] Returns an array of Offre objects
 //     */

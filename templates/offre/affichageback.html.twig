@@ -1,15 +1,11 @@
 {% extends 'base-back.html.twig' %}
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 6e16bf4008d740d51f92a8d8664babcdb5e1be4b
-{% block title %}Offre index
+{% block title %}Offre index{% endblock %}
 
-{% endblock %}
 
 
 {% block body %}
+
 
 <style>
     .bn60 {
@@ -30,6 +26,13 @@
 </style>
 
     <h1>Offre index</h1>
+    <form id="search-form" method="GET">
+    <input type="text" id="search-input" name="searchTerm">
+    <button type="submit" id="search-button">Rechercher</button>
+</form>
+
+<div id="search-results"></div>
+    
   
 
 
@@ -38,17 +41,6 @@
         <div class="alert alert-danger">
         {{message}}
         {% endfor %}
-<<<<<<< HEAD
-=======
-=======
-{% block title %}Offre index{% endblock %}
-
-{% block body %}
-    <h1>Offre index</h1>
-
-    <table class="table">
->>>>>>> ba85304107831b3acd7bbc56141d72ddff22ce70
->>>>>>> 6e16bf4008d740d51f92a8d8664babcdb5e1be4b
         <thead>
             <tr>
                 <th>Id</th>
@@ -70,18 +62,8 @@
                 <td>{{ offre.dateExpiration ? offre.dateExpiration|date('Y-m-d') : '' }}</td>
                 <td>{{ offre.tarif }}</td>
                 <td>
-<<<<<<< HEAD
                     <a class="bn60" href="{{ path('app_offreback_show', {'id': offre.id}) }}">show</a>
                     <a   class="bn60"  href="{{ path('app_offreback_edit', {'id': offre.id}) }}">edit</a>
-=======
-<<<<<<< HEAD
-                    <a class="bn60" href="{{ path('app_offreback_show', {'id': offre.id}) }}">show</a>
-                    <a   class="bn60"  href="{{ path('app_offreback_edit', {'id': offre.id}) }}">edit</a>
-=======
-                    <a href="{{ path('app_offreback_show', {'id': offre.id}) }}">show</a>
-                    <a href="{{ path('app_offreback_edit', {'id': offre.id}) }}">edit</a>
->>>>>>> ba85304107831b3acd7bbc56141d72ddff22ce70
->>>>>>> 6e16bf4008d740d51f92a8d8664babcdb5e1be4b
                 </td>
             </tr>
         {% else %}
@@ -89,14 +71,18 @@
                 <td colspan="7">no records found</td>
             </tr>
         {% endfor %}
+
+  
+       
         </tbody>
     </table>
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 6e16bf4008d740d51f92a8d8664babcdb5e1be4b
     <a class="bn60" href="{{ path('app_offreback_new') }}">Create new</a>
+     <a class="bn60" href="{{ path('offer_list') }}">Trier</a>
+    
+
+    
+     
     <style>
 
         .t1{
@@ -113,11 +99,50 @@
             font-weight: bold;
         }
             </style>
+
+
+            <script>
+  // Récupération des éléments DOM
+  const searchForm = document.getElementById('search-form');
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+
+  // Fonction pour envoyer la requête Ajax
+  function searchOffres() {
+      // Création d'une instance XMLHttpRequest
+      const xhr = new XMLHttpRequest();
+
+      // Configuration de la requête
+      xhr.open('GET', '/search-offres?searchTerm=' + searchInput.value);
+
+      // Gestionnaire d'événement pour la réponse
+      xhr.onload = function () {
+          if (xhr.status === 200) {
+              const response = JSON.parse(xhr.responseText);
+
+              // Supprimer les résultats précédents
+              while (searchResults.firstChild) {
+                  searchResults.removeChild(searchResults.firstChild);
+              }
+
+              // Créer des éléments DOM pour chaque résultat et les ajouter à la page
+              response.forEach(offre => {
+                  const div = document.createElement('div');
+                  div.innerHTML = `<h2>${offre.nom}</h2><p>${offre.description}</p>`;
+                  searchResults.appendChild(div);
+              });
+          }
+      };
+
+      // Envoyer la requête
+      xhr.send();
+  }
+
+  // Ajouter un gestionnaire d'événement pour le formulaire de recherche
+  searchForm.addEventListener('submit', event => {
+      event.preventDefault();
+      searchOffres();
+  });
+</script>
            
-<<<<<<< HEAD
-=======
-=======
-    <a href="{{ path('app_offreback_new') }}">Create new</a>
->>>>>>> ba85304107831b3acd7bbc56141d72ddff22ce70
->>>>>>> 6e16bf4008d740d51f92a8d8664babcdb5e1be4b
 {% endblock %}

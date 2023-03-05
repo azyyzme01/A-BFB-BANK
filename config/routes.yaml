@@ -1,3 +1,7 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+app_offre_search:
+    path: '/search-offres'
+    controller: 'App\Controller\UserController::searchOffres'
