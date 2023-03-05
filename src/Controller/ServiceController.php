@@ -3,13 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Service;
+use App\Entity\Rdv;
+use App\Form\Rdv1Type;
 use App\Form\Service1Type;
 use App\Repository\ServiceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use App\Repository\RdvRepository;
 #[Route('/service')]
 class ServiceController extends AbstractController
 {
@@ -30,7 +32,7 @@ class ServiceController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $serviceRepository->save($service, true);
-
+            $flashy->primaryDark('succes', 'http://your-awesome-link.com');
             return $this->redirectToRoute('app_service_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -56,7 +58,7 @@ class ServiceController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $serviceRepository->save($service, true);
-
+            $flashy->primaryDark('succes', 'http://your-awesome-link.com');
             return $this->redirectToRoute('app_service_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -71,8 +73,32 @@ class ServiceController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$service->getId(), $request->request->get('_token'))) {
             $serviceRepository->remove($service, true);
+            $flashy->primaryDark('succes', 'http://your-awesome-link.com');
         }
 
         return $this->redirectToRoute('app_service_index', [], Response::HTTP_SEE_OTHER);
+    }
+    #[Route('/stat', name: 'app_stat', methods: ['GET', 'POST'])]
+    public function stats(ServiceRepository $serviceRepository, RdvRepository $appointmentRepository): Response
+    {
+        $services = $serviceRepository->findAll();
+        $appointments = $appointmentRepository->findAll();
+
+        // Calculer le nombre de rendez-vous pour chaque service
+        $appointmentsByService = array();
+        foreach ($services as $service) {
+            $appointmentsByService[$service->getType()] = 0;
+            foreach ($appointments as $appointment) {
+                if ($appointment->getServices() === $service) {
+                    $appointmentsByService[$service->getType()]++;
+                }
+            }
+        }
+
+        return $this->render('st.html.twig', [
+            'services' => $services,
+            'appointmentsByService' => $appointmentsByService,
+            'appointmentsCount' => count($appointments),
+        ]);
     }
 }

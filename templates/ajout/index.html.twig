@@ -3,9 +3,29 @@
 {% block title %}New Rdv{% endblock %}
 
 {% block body %}
+<style>
+    .bn60 {
+  background-color: #190c8d;
+  color: #ffffff;
+  font-size: 1.3em;
+  font-weight: 400;
+  position: relative;
+  outline: none;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 55px;
+  width: 100px;
+}
+</style>
+
+
+
     <h1>Create new Rdv</h1>
 
     {{ include('rdv/_form.html.twig') }}
-
-    <a href="{{ path('app_rdv') }}">NEW Rdv</a>
+ 
+ 
 {% endblock %}

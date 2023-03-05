@@ -3,9 +3,42 @@
 {% block title %}New Service{% endblock %}
 
 {% block body %}
+<style>
+    .bn60 {
+  background-color: #190c8d;
+  color: #ffffff;
+  font-size: 1.3em;
+  font-weight: 400;
+  position: relative;
+  outline: none;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 55px;
+  width: 100px;
+}
+</style>
     <h1>Create new Service</h1>
 
     {{ include('service/_form.html.twig') }}
 
-    <a href="{{ path('app_service_index') }}">back to list</a>
+    <a class="bn60"  href="{{ path('app_service_index') }}">back to list</a>
+     <style>
+
+        .t1{
+         border-collapse: collapse;
+         width: 1000px;
+         margin-bottom: 400px;
+        }
+        th,td {
+            border: 1px solid black;
+            padding: 70px;
+        }
+        caption{
+            background-color: lightblue;
+            font-weight: bold;
+        }
+            </style>
 {% endblock %}

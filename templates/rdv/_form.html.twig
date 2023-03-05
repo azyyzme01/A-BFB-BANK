@@ -1,4 +1,26 @@
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
     {{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+<a> <img src="image/l.jpg" alt="logo" > </a>
+ <style>
+
+ form{
+
+ width: 700px;
+
+ height: auto;
+
+ position: absolute;
+
+ left: 75%;
+
+ top: 50%;
+
+  transform: translate(-90%, -50%);
+
+ -webkit-transform: translate(-50%, -50%);
+
+ }
+
+ </style>

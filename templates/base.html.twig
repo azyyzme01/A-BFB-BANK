@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>{% block title %}A+BFB : Home{% endblock %}</title>
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet'>
+    {%block stylesheet%}
+   <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+    {%endblock%}
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/icon" href="{{ asset('assets/images/favicon.ico')}}">
     <!-- Font Awesome -->
@@ -254,6 +259,8 @@
 
 <!-- jQuery library -->
 {% block js %}
+<script src="//code.jquery.com/jquery.js"></script>
+<script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <!-- Bootstrap -->
@@ -276,5 +283,6 @@
     <!-- Custom js -->
     <script type="text/javascript" src="{{ asset ('assets/js/custom.js')}}"></script>
 {% endblock %}
+{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 </body>
 </html>

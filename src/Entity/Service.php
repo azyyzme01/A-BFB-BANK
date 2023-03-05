@@ -23,7 +23,8 @@ class Service
     #[ORM\Column]
     private ?bool $dispo = null;
 
-    #[ORM\OneToMany(mappedBy: 'services', targetEntity: Rdv::class)]
+    #[ORM\OneToMany(mappedBy: 'services', targetEntity: Rdv::class,cascade:["persist","remove"])]
+    #[ORM\JoinColumn(onDelete:"SET NULL")]
     private Collection $rdvs;
 
     public function __construct()

@@ -1,11 +1,12 @@
 {% extends 'base-back.html.twig' %}
 
-{% block title %}New Rdv{% endblock %}
+{% block title %}Passer Rendez-vous{% endblock %}
 
 {% block body %}
-    <h1>Create new Rdv</h1>
+    <h1>Passer un Rendez-Vous</h1>
 
     {{ include('rdv/_form.html.twig') }}
 
-    <a href="{{ path('app_rdvb_index') }}">back to list</a>
+    <a href="{{ path('app_rdvb_index') }}">retour</a>
+   
 {% endblock %}

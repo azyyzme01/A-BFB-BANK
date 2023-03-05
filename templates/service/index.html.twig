@@ -3,7 +3,24 @@
 {% block title %}Service index{% endblock %}
 
 {% block body %}
-    <h1>Service index</h1>
+<style>
+    .bn60 {
+  background-color: #190c8d;
+  color: #ffffff;
+  font-size: 1.3em;
+  font-weight: 400;
+  position: relative;
+  outline: none;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 55px;
+  width: 100px;
+}
+</style>
+    <h1>Services</h1>
 
     <table class="table">
         <thead>
@@ -21,8 +38,8 @@
                 <td>{{ service.type }}</td>
                 <td>{{ service.dispo ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('app_service_show', {'id': service.id}) }}">show</a>
-                    <a href="{{ path('app_service_edit', {'id': service.id}) }}">edit</a>
+                    <a class="bn60"  href="{{ path('app_service_show', {'id': service.id}) }}">show</a>
+                    <a class="bn60"  href="{{ path('app_service_edit', {'id': service.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -32,6 +49,21 @@
         {% endfor %}
         </tbody>
     </table>
+    <style>
 
-    <a href="{{ path('app_service_new') }}">Create new</a>
+        .t1{
+         border-collapse: collapse;
+         width: 1000px;
+         margin-bottom: 400px;
+        }
+        th,td {
+            border: 1px solid black;
+            padding: 70px;
+        }
+        caption{
+            background-color: lightblue;
+            font-weight: bold;
+        }
+            </style>
+    <a  class="bn60" href="{{ path('app_service_new') }}">Create new</a>
 {% endblock %}

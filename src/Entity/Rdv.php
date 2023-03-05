@@ -13,10 +13,12 @@ class Rdv
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("Rdv")]
     private ?int $id = null;
     #[Assert\NotBlank]
     #[Assert\GreaterThanOrEqual("today")]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups("Rdv")]
     
     private ?\DateTimeInterface $date = null;
    
@@ -24,14 +26,26 @@ class Rdv
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank (message:"non vide")]
     #[Assert\Length(min:10)]
+    #[Groups("Rdv")]
     private ?string $raison = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("Rdv")]
    
     private ?string $heure = null;
 
     #[ORM\ManyToOne(inversedBy: 'rdvs')]
+    #[Assert\NotBlank (message:"non vide")]
+    #[Groups("Rdv")]
     private ?Service $services = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups("Rdv")]
+    private ?\DateTimeInterface $start = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups("Rdv")]
+    private ?\DateTimeInterface $end = null;
 
     public function getId(): ?int
     {
@@ -82,6 +96,30 @@ class Rdv
     public function setServices(?Service $services): self
     {
         $this->services = $services;
+
+        return $this;
+    }
+
+    public function getStart(): ?\DateTimeInterface
+    {
+        return $this->start;
+    }
+
+    public function setStart(\DateTimeInterface $start): self
+    {
+        $this->start = $start;
+
+        return $this;
+    }
+
+    public function getEnd(): ?\DateTimeInterface
+    {
+        return $this->end;
+    }
+
+    public function setEnd(\DateTimeInterface $end): self
+    {
+        $this->end = $end;
 
         return $this;
     }
