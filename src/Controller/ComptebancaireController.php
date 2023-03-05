@@ -6,6 +6,7 @@ use Endroid\QrCodeBundle\Response\QrCodeResponse;
 use Endroid\QrCode\Writer\PngWriter;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
+
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
@@ -80,7 +81,7 @@ class ComptebancaireController extends AbstractController
         return new Response(json_encode($comptesNormalises));
     }
 
-    #[Route("addcomptesJSON", name: "addScomptesJSON")]
+    #[Route("/addcomptesJSON", name: "addScomptesJSON")]
     public function addcomotesJSON(Request $req,   NormalizerInterface $Normalizer)
     {
 
