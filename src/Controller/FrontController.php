@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,13 +15,37 @@ use Symfony\Component\Serializer\Normalizer\NormalizableInterface;
 #[Route('/front')]
 class FrontController extends AbstractController
 {
-    #[Route('/', name: 'app_front_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
+    public function index(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
     {
+        $sort = $request->query->get('sort', 'id'); // default to sorting by id if no sort parameter is provided
+        $dir = $request->query->get('dir', 'asc'); // default to ascending order if no dir parameter is provided
+
+        // Make sure that the sort direction is either 'asc' or 'desc'
+        $dir = in_array(strtolower($dir), ['asc', 'desc']) ? strtolower($dir) : 'asc';
+
+        // Use the QueryBuilder to get the users and sort them based on the provided parameters
+        $qb = $userRepository->createQueryBuilder('u')
+            ->orderBy("u.$sort", $dir);
+        $users = $qb->getQuery()->getResult();
+
+        // Paginate the results
+        $users = $paginator->paginate(
+            $users,
+            $request->query->getInt('page', 1),
+            limit: 6
+        );
+
+        // Pass the sort and dir parameters to the Twig template
         return $this->render('front/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $users,
+            'sort' => $sort,
+            'dir' => $dir,
         ]);
     }
+
+
+
+
 
     #[Route('/new', name: 'app_front_new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserRepository $userRepository): Response

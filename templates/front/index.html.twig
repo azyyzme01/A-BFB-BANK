@@ -157,6 +157,24 @@
                 </div>
                 <table class="table table-striped table-hover table-bordered">
                     <thead>
+                    <th>
+                        <a href="{{ path('app_front_index', {'sort': 'id', 'dir': sort == 'id' and dir == 'asc' ? 'desc' : 'asc'}) }}">Id {% if sort == 'id' %}<i class="fa fa-sort-{% if dir == 'asc' %}up{% else %}down{% endif %}"></i>{% endif %}</a>
+                    </th>
+                    <th>
+                        <a href="{{ path('app_front_index', {'sort': 'name', 'dir': sort == 'name' and dir == 'asc' ? 'desc' : 'asc'}) }}">Name {% if sort == 'name' %}<i class="fa fa-sort-{% if dir == 'asc' %}up{% else %}down{% endif %}"></i>{% endif %}</a>
+                    </th>
+                    <th>
+                        <a href="{{ path('app_front_index', {'sort': 'prenomc', 'dir': sort == 'Prenomc' and dir == 'asc' ? 'desc' : 'asc'}) }}">Prenom {% if sort == 'Prenomc' %}<i class="fa fa-sort-{% if dir == 'asc' %}up{% else %}down{% endif %}"></i>{% endif %}</a>
+                    </th>
+                    <th>
+                        <a href="{{ path('app_front_index', {'sort': 'num_tel', 'dir': sort == 'num_tel' and dir == 'asc' ? 'desc' : 'asc'}) }}">Numéro de téléphone {% if sort == 'num_tel' %}<i class="fa fa-sort-{% if dir == 'asc' %}up{% else %}down{% endif %}"></i>{% endif %}</a>
+                    </th>
+                    <th>
+                        <a href="{{ path('app_front_index', {'sort': 'email', 'dir': sort == 'email' and dir == 'asc' ? 'desc' : 'asc'}) }}">Email {% if sort == 'email' %}<i class="fa fa-sort-{% if dir == 'asc' %}up{% else %}down{% endif %}"></i>{% endif %}</a>
+                    </th>
+                    <th>
+                        <a href="{{ path('app_front_index', {'sort': 'city', 'dir': sort == 'city' and dir == 'asc' ? 'desc' : 'asc'}) }}">City {% if sort == 'city' %}<i class="fa fa-sort-{% if dir == 'asc' %}up{% else %}down{% endif %}"></i>{% endif %}</a>
+                    </th>
                     <tr>
                         <th>Id</th>
                         <th>Nom</th>
@@ -193,9 +211,12 @@
                             <td colspan="5">no records found</td>
                         </tr>
                     {% endfor %}
+                    {{ knp_pagination_render(users) }}
+
                     </tbody>
 
                 </table>
+
 
             </div>
         </div>

@@ -1,3 +1,7 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+app_front_index:
+  path: /front/
+  controller: App\Controller\FrontController::index
+  methods: [GET]
