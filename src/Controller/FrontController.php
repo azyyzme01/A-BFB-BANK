@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizableInterface;
-
+use Dompdf\Dompdf;
 #[Route('/front')]
 class FrontController extends AbstractController
 {
@@ -19,6 +19,7 @@ class FrontController extends AbstractController
     {
         $sort = $request->query->get('sort', 'id'); // default to sorting by id if no sort parameter is provided
         $dir = $request->query->get('dir', 'asc'); // default to ascending order if no dir parameter is provided
+
 
         // Make sure that the sort direction is either 'asc' or 'desc'
         $dir = in_array(strtolower($dir), ['asc', 'desc']) ? strtolower($dir) : 'asc';
@@ -101,6 +102,37 @@ class FrontController extends AbstractController
 
         return $this->redirectToRoute('app_front_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+    //Exporter pdf (composer require dompdf/dompdf)
+    #[Route('/generate-pdf/{id}', name: 'app_generate_pdf')]
+    public function generatePdf(Request $request, User $user)
+    {
+        // Generate the PDF content
+        $html = $this->renderView('user/userPdf.html.twig', [
+            'user' => [$user],
+        ]);
+
+
+        // Instantiate the dompdf class and render the HTML
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($html);
+
+        // Set the paper size and orientation
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the PDF
+        $dompdf->render();
+        // Return the PDF as a response
+        return new Response($dompdf->output(), 200, [
+            'Content-Type' => 'articles/pdf',
+            'Content-Disposition' => 'inline; filename="user.pdf"',
+        ]);
+    }
+
+
+
+
 
 
 }
