@@ -173,9 +173,18 @@ class ComptebancaireController extends AbstractController
         if (!$bankAccount) {
             throw $this->createNotFoundException('Le compte bancaire n\'existe pas');
         }
+         // Concaténer les informations du compte bancaire pour générer le texte du code QR
+    $qrText = sprintf(
+        "Nom : %s\nPrenom :  %s\num_tlfn: %s\nSolde initial : %.2f Dinars",
+        $bankAccount->getNom(),
+        $bankAccount->getPrenom(),
+        $bankAccount->getNumTlfn(),
+        $bankAccount->getSoldeInitial()
+    );
+
 
         // Générer le code QR à partir des informations du compte bancaire
-        $qrCode = new QrCode($bankAccount->getNom());
+        $qrCode = new QrCode($qrText);
         $qrCode->setSize(300);
         $qrCode->setMargin(10);
 

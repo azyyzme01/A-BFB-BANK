@@ -15,7 +15,7 @@ class Transaction
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"NSC is required")]
+    #[Assert\NotBlank(message:"remplir ce champ")]
     #[Assert\Length(
         min: 3,
         max: 10,
@@ -26,7 +26,7 @@ class Transaction
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"NSC is required")]
+    #[Assert\NotBlank(message:"remplir ce champ")]
     #[Assert\Length(
         min: 3,
         max: 10,
@@ -36,17 +36,17 @@ class Transaction
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"NSC is required")]
+    #[Assert\NotBlank(message:"remplir ce champ")]
     #[Assert\Email(message:"email invalid")]
     private ?string $email = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message:"NSC is required")]
+    #[Assert\NotBlank(message:"remplir ce champ")]
     #[Assert\Length(
         min: 8,
         max: 8,
         minMessage: 'Your nmr_tlfn must be at least {{ limit }} characters long',
-        maxMessage: 'Your num_tlfn  cannot be longer than {{ limit }} characters',
+        maxMessage: 'Your nmr_tlfn must be at least {{ limit }} characters long',
     )]
     private ?int $num_tlfn = null;
 
@@ -58,7 +58,7 @@ class Transaction
     private ?Comptebancaire $compte_source = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message:"NSC is required")]
+    #[Assert\NotBlank(message:"remplir ce champ")]
     #[Assert\Positive(message:"montant doit etre positif")]
     private ?float $montant = null;
 

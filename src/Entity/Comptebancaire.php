@@ -24,43 +24,43 @@ class Comptebancaire
     #[Assert\Length(
         min: 3,
         max: 10,
-        minMessage: 'Your first name must be at least {{ limit }} characters long',
-        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
+        minMessage: 'nom doit contenir au moins{{ limit }} caracteres',
+        maxMessage: 'nom doit contenir au maximum {{ limit }} caracteres',
     )]
-    #[Assert\NotBlank(message:"NSC is required")]
+    #[Assert\NotBlank(message:"remplir ce champ")]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
     #[Groups("comptes")]
-    #[Assert\NotBlank(message:"NSC is required")]
+    #[Assert\NotBlank(message:"remplir ce champ")]
     #[Assert\Length(
         min: 3,
         max: 10,
-        minMessage: 'Your last name must be at least {{ limit }} characters long',
-        maxMessage: 'Your last name cannot be longer than {{ limit }} characters',
+        minMessage: 'prenom doit contenir au moins{{ limit }} caracteres',
+        maxMessage: 'prenom doit contenir au maximum {{ limit }} caracteres',
     )]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
     #[Groups("comptes")]
-    #[Assert\NotBlank(message:"NSC is required")]
+    #[Assert\NotBlank(message:"remplir ce champ")]
     #[Assert\Email(message:"email invalid")]
     private ?string $email = null;
 
     #[ORM\Column]
     #[Groups("comptes")]
-    #[Assert\NotBlank(message:"NSC is required")]
+    #[Assert\NotBlank(message:"remplir ce champ")]
     #[Assert\Length(
         min: 8,
         max: 8,
-        minMessage: 'Your nmr_tlfn must be at least {{ limit }} characters long',
-        maxMessage: 'Your num_tlfn  cannot be longer than {{ limit }} characters',
+        minMessage: 'num_tlfn doit contenir au moins{{ limit }} caracteres',
+        maxMessage: 'num_tlfn doit contenir au maximum {{ limit }} caracteres',
     )]
     private ?int $num_tlfn = null;
 
     #[ORM\Column]
     #[Groups("comptes")]
-    #[Assert\NotBlank(message:"NSC is required")]
+    #[Assert\NotBlank(message:"remplir ce champ")]
     #[Assert\Positive(message:"solde doit etre positif")]
     private ?float $solde_initial = null;
 

@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 
 #[Route('/transaction')]
 class TransactionController extends AbstractController
@@ -24,12 +26,19 @@ class TransactionController extends AbstractController
     }
 
     #[Route('/new', name: 'app_transaction_new', methods: ['GET', 'POST'])]
-    public function effectuerTransaction(Request $request, TransactionRepository $transactionRepository, EntityManagerInterface $entityManager): Response
+    public function effectuerTransaction(Request $request, TransactionRepository $transactionRepository, EntityManagerInterface $entityManager,MailerInterface $mailer): Response
     {
         $transaction = new Transaction();
         $form = $this->createForm(TransactionType::class, $transaction);
         $form->handleRequest($request);
-    
+        
+        $email = (new Email())
+        ->from('admin@admin.com')
+        ->to('client@gmail.com')
+        ->subject('bienvenue dans notre espace client!')
+        ->html('<p>transaction effectuée avec succes</p>');
+
+    $mailer->send($email );
         if ($form->isSubmitted() && $form->isValid()) {
     
             // Récupérer l'objet Transaction rempli avec les données du formulaire
