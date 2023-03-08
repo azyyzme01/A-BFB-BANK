@@ -51,4 +51,62 @@ class UserJsonController extends AbstractController
         else{
         return new Response("user not found");}
     }
+
+
+    #[Route("UserJSON/signup", name: "app_signup")]
+    public function signup(Request $request)
+    {
+        $email =$request->query->get("email");
+        $name =$request->query->get("name");
+        $password=$request->query->get("password");
+        $city=$request->query->get("city");
+        $prenomc=$request->query->get("prenomc");
+        $num_tel=$request->query->get("num_tel");
+
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            return new Response("Email invalide");
+        }
+        $user = new User();
+        $user->setName($name);
+        $user->setEmail($email);
+        $user->setPassword($password);
+        $user->setIsVerified(true);
+        $user->setCity($city);
+        $user->setPrenomc($prenomc);
+        $user->setNumTel($num_tel);
+        try{
+            $em =$this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+            return new JsonResponse("account is created",status: 200);
+        }catch (\Exception $ex){
+
+            return new Response("execption ".$ex->getMessage());
+
+        }
+
+    }
+
+
+    #[Route("UserJSON/signup", name: "updateUserJSON")]
+    public function updateUserJSON(Request $req, $id, NormalizerInterface $Normalizer)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($id);
+        $user->setName($req->get('name'));
+        $user->setNumTel($req->get('num'));
+        $user->setPrenomc($req->get('prenom'));
+        $user->setCity($req->get('ville'));
+        $user->setEmail($req->get('email'));
+        $user->setPassword($req->get('password'));
+
+        $em->flush();
+
+        $jsonContent = $Normalizer->normalize($user, 'json', ['groups' => 'user']);
+        return new Response("Student updated successfully " . json_encode($jsonContent));
+    }
+
+
+
 }
