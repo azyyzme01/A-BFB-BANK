@@ -1,0 +1,62 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Transaction index{% endblock %}
+
+{% block body %}
+<style>
+    .bn60 {
+  background-color: #190c8d;
+  color: #ffffff;
+  font-size: 1.3em;
+  font-weight: 400;
+  position: relative;
+  outline: none;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 55px;
+  width: 100px;
+}
+</style>
+    <h1>Transaction index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>Num_tlfn</th>
+                <th>Compte_destination</th>
+                <th>montant</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction.id }}</td>
+                <td>{{ transaction.nom }}</td>
+                <td>{{ transaction.prenom }}</td>
+                <td>{{ transaction.email }}</td>
+                <td>{{ transaction.numTlfn }}</td>
+                <td>{{ transaction.compteDestination }}</td>
+                <td>{{ transaction.montant }}</td>
+                <td>
+                    <a class="bn60" href="{{ path('app_transactionback_show', {'id': transaction.id}) }}">show</a>
+                    <a class="bn60" href="{{ path('app_transactionback_edit', {'id': transaction.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a  class="bn60" href="{{ path('app_transactionback_new') }}">Create new</a>
+{% endblock %}

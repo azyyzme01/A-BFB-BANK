@@ -1,0 +1,61 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Comptebancaire index{% endblock %}
+
+{% block body %}
+<style>
+    .bn60 {
+  background-color: #190c8d;
+  color: #ffffff;
+  font-size: 1.3em;
+  font-weight: 400;
+  position: relative;
+  outline: none;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 55px;
+  width: 100px;
+}
+</style>
+    <h1>Comptebancaire index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>Num_tlfn</th>
+                <th>Solde_initial</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comptebancaire in comptebancaires %}
+            <tr>
+                <td>{{ comptebancaire.id }}</td>
+                <td>{{ comptebancaire.nom }}</td>
+                <td>{{ comptebancaire.prenom }}</td>
+                <td>{{ comptebancaire.email }}</td>
+                <td>{{ comptebancaire.numTlfn }}</td>
+                <td>{{ comptebancaire.soldeInitial }}</td>
+                <td>
+                    <a class="bn60" href="{{ path('app_comptebancaireback_show', {'id': comptebancaire.id}) }}">show</a>
+                    <a class="bn60" href="{{ path('app_comptebancaireback_edit', {'id': comptebancaire.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="bn60" href="{{ path('app_comptebancaire_new') }}">Create new</a>
+    <a href="{{ path('bank_account_sort', {'tri': 'comptebancaire.soldeInitial'}) }}">Trier par solde</a>
+{% endblock %}

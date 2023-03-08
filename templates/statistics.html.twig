@@ -1,0 +1,27 @@
+{% extends 'st.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block body %}
+    <h1>Statistiques</h1>
+
+    <h2>Nombre de rendez-vous total : {{ appointmentsCount }}</h2>
+
+    <h2>Nombre de rendez-vous par service :</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th>Nombre de rendez-vous</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for service, count in appointmentsByService %}
+                <tr>
+                    <td>{{ service }}</td>
+                    <td>{{ count }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

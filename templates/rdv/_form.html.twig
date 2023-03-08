@@ -1,0 +1,27 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+<a> <img src="image/l.jpg" width="700" alt="logo" > </a>
+ <style>
+
+ form{
+
+ width: 700px;
+
+ height: auto;
+
+ position: absolute;
+
+ left: 70%;
+
+ top: 50%;
+
+  transform: translate(-90%, -50%);
+
+ -webkit-transform: translate(-50%, -50%);
+
+ }
+
+ </style>

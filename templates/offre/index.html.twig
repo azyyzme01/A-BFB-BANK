@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+{% block title %}Offres{% endblock %}
+
+{% block body %}
+<style>
+    .bn60 {
+  background-color: #190c8d;
+  color: #ffffff;
+  font-size: 1.3em;
+  font-weight: 400;
+  position: relative;
+  outline: none;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 55px;
+  width: 100px;
+}
+</style>
+  <h1>Nos offres</h1>
+  <div class="img">
+    {% for offre in offres %}
+      <div class="col-lg-3 col-md-4 col-6">
+        <div class="product">
+          <div class="product_img">
+           
+            <img src="/uploads/{{ offre.getImage() }}" alt="image" width="250" height="100">
+            </a>
+            <div class="product_info">
+              <h6 class="product_title">Tarif: {{ offre.tarif }}</h6>
+              <h7 class="product_title">Description:{{ offre.description }}</h7>
+             
+            </div>
+             <div class="pr_desc">
+               <h8 class="product_title">Type: {{ offre.getTypes() }}</h8>
+             
+              </div>
+                <div class="pr_d">
+               <p>Date d'Ouverture: {{ offre.getDateOuverture()|date('d/m/Y') }}</p>
+              <p>Date d'expiration: {{ offre.getDateExpiration()|date('d/m/Y') }}</p>
+              </div>
+             
+                <a class="bn60" href="{{ path('app_offre_show', {'id': offre.id}) }}">show</a>
+          </div>
+        </div>
+      </div>
+      
+                  
+            
+             
+    {% endfor %}
+   
+  </div>
+{% endblock %}
+
+{% block stylesheets %}
+  <style>
+ 
+    .img {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .img .col-lg-3 {
+      flex: 0 0 25%;
+      max-width: 25%;
+    }
+    .img .product {
+      position: relative;
+      margin: 5px;
+      border: 1px solid #ccc;
+      background-color: #f5f5f5;
+    }
+    .img .product:hover {
+      box-shadow: 0px 0px 5px #888;
+    }
+    .img .product img {
+      max-width: 100%;
+      height: auto;
+    }
+    .img .product_info {
+      padding: 10px;
+    }
+    .img .product_title {
+      margin: 0;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .img .product_price {
+      margin: 10px 0;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .img .pr_desc {
+      margin: 10px 0;
+      font-size: 14px;
+    }
+  .img .pr_d {
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 10px;
+}
+  </style>
+{% endblock %}

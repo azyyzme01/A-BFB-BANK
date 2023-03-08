@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Saisie vocale</h1>
+
+    <form id="voice-form">
+        <label for="voice-input">Parlez maintenant :</label>
+        <input type="text" id="voice-input" name="voice-input" disabled>
+        <button type="button" id="start-voice">Démarrer la saisie vocale</button>
+        <button type="button" id="stop-voice" disabled>Arrêter la saisie vocale</button>
+    </form>
+
+    <div id="results">
+        <p>Transcription :</p>
+        <ul id="transcription"></ul>
+    </div>
+
+    <script src="{{ asset('js/annyang.min.js') }}"></script>
+    <script src="{{ asset('js/saisie_vocale.js') }}"></script>
+    <script src="{{ asset('bundles/annyang-bundle/annyang/annyang.min.js') }}"></script>
+    <script src="{{ asset('js/saisie_vocale.js') }}"></script>
+{% endblock %}

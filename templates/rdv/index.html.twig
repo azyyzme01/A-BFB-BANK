@@ -1,0 +1,78 @@
+{% extends 'back/index.html.twig' %}
+
+{% block title %}Rendez vous{% endblock %}
+
+{% block body %}
+<style>
+    .bn60 {
+  background-color: #190c8d;
+  color: #ffffff;
+  font-size: 1.3em;
+  font-weight: 400;
+  position: relative;
+  outline: none;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 55px;
+  width: 100px;
+}
+</style>
+    <h1>Rendez-Vous</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Raison</th>
+                <th>Heure</th>
+                <th>Type Service</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rdv in rdvs %}
+            <tr>
+                <td>{{ rdv.id }}</td>
+                <td>{{ rdv.date ? rdv.date|date('Y-m-d') : '' }}</td>
+                <td>{{ rdv.start ? rdv.start|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ rdv.end ? rdv.end|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ rdv.raison }}</td>
+                <td>{{ rdv.heure }}</td>
+                
+                 <td>{{ rdv.services }}</td>
+                <td>
+                    <a class="bn60"  href="{{ path('app_rdv_show', {'id': rdv.id}) }}">show</a>
+                    <a class="bn60"  href="{{ path('app_rdv_edit', {'id': rdv.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <style>
+
+        .t1{
+         border-collapse: collapse;
+         width: 1000px;
+         margin-bottom: 400px;
+        }
+        th,td {
+            border: 1px solid black;
+            padding: 70px;
+        }
+        caption{
+            background-color: lightblue;
+            font-weight: bold;
+        }
+            </style>
+    <a class="bn60" href="{{ path('app_rdv_new') }}">Create new</a>
+{% endblock %}

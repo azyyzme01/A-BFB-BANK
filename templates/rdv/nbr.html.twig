@@ -1,0 +1,37 @@
+
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<a> <img src="image/oo.jpg" alt="logo" > </a>
+{% if nombrePrecedents == 0 %}
+<p>
+    Vous serras passer le premier
+</p>
+  
+{% elseif nombrePrecedents == 1 %}
+<p> Il y a 1 rendez-vous précédent vous.</p>
+   
+{% else %}
+<p> Il y a {{ nombrePrecedents }} rendez-vous précédents vous. </p>
+
+    
+
+{% endif %}
+<a class="bn60" href="{{ path('app_rdv') }}">Un Nouveau Rendez-vous</a>
+
+
+<style>
+
+p {
+    font-size: 3.4rem;
+    font-family: Helvetica, Arial, sans-serif;
+    text-align: center;
+  color: rgb(0, 255, 225);
+}
+a{
+    text-align: center;
+}
+
+        </style>
+{%endblock%}

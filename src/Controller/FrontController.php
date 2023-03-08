@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizableInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route('/front')]
 class FrontController extends AbstractController
@@ -58,7 +59,7 @@ class FrontController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $userRepository->save($user, true);
 
-            return $this->redirectToRoute('app_front_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('front/index.html.twig', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('front/edit.html.twig', [
@@ -76,6 +77,29 @@ class FrontController extends AbstractController
 
         return $this->redirectToRoute('app_front_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+    public function searchUser(Request $request, UserRepository $userRepository): JsonResponse
+    {
+        $searchTerm = $request->query->get('searchTerm');
+        $user = $userRepository->searchByTerm($searchTerm);
+
+        $response = [];
+
+        foreach ($user as $users) {
+            $response[] = [
+                'id' => $users->getId(),
+                'nom' => $users->getName(),
+                'num_tel' => $users->getNumTel(),
+                'prenom' => $users->getPrenomc(),
+                'email' => $users->getEmail()
+            ];
+        }
+
+        return new JsonResponse($response);
+    }
+
+
 
 
 }

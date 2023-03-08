@@ -1,0 +1,12 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Passer Rendez-vous{% endblock %}
+
+{% block body %}
+    <h1>Passer un Rendez-Vous</h1>
+
+    {{ include('rdv/_form.html.twig') }}
+
+    <a href="{{ path('app_rdvb_index') }}">retour</a>
+   
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Edit Comptebancaire{% endblock %}
+
+{% block body %}
+    <h1>Edit Comptebancaire</h1>
+
+    {{ include('comptebancaire/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_comptebancaireback_index') }}">back to list</a>
+
+    {{ include('comptebancaire/_delete_form.html.twig') }}
+{% endblock %}

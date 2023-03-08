@@ -1,0 +1,69 @@
+{% extends 'back/index.html.twig' %}
+
+{% block title %}Service index{% endblock %}
+
+{% block body %}
+<style>
+    .bn60 {
+  background-color: #190c8d;
+  color: #ffffff;
+  font-size: 1.3em;
+  font-weight: 400;
+  position: relative;
+  outline: none;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 55px;
+  width: 100px;
+}
+</style>
+    <h1>Services</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Dispo</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for service in services %}
+            <tr>
+                <td>{{ service.id }}</td>
+                <td>{{ service.type }}</td>
+                <td>{{ service.dispo ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a class="bn60"  href="{{ path('app_service_show', {'id': service.id}) }}">show</a>
+                    <a class="bn60"  href="{{ path('app_service_edit', {'id': service.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <style>
+
+        .t1{
+         border-collapse: collapse;
+         width: 1000px;
+         margin-bottom: 400px;
+        }
+        th,td {
+            border: 1px solid black;
+            padding: 70px;
+        }
+        caption{
+            background-color: lightblue;
+            font-weight: bold;
+        }
+            </style>
+    <a  class="bn60" href="{{ path('app_service_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base-back.html.twig' %}
+
+
+{% block body %}
+<style>
+    .bn60 {
+  background-color: #190c8d;
+  color: #ffffff;
+  font-size: 1.3em;
+  font-weight: 400;
+  position: relative;
+  outline: none;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 55px;
+  width: 100px;
+}
+</style>
+    <h1>Liste des rendez-vous</h1>
+    <p>Trier les rendez-vous par :</p>
+    <ul>
+        <li><a href="{{ path('app_tri', {'type': 'asc'}) }}">date croissante</a></li>
+        <li><a href="{{ path('app_tri', {'type': 'desc'}) }}">date décroissante</a></li>
+    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Services</th>
+                <th>RAISON</th>
+                <th>Heure</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rdv in rdvs %}
+                <tr>
+                    <td>{{ rdv.date|date('d/m/Y') }}</td>
+                    <td>{{ rdv.services }}</td>
+                    <td>{{ rdv.raison }}</td>
+                    <td>{{ rdv.heure }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <style>
+
+        .t1{
+         border-collapse: collapse;
+         width: 1000px;
+         margin-bottom: 400px;
+        }
+        th,td {
+            border: 1px solid black;
+            padding: 70px;
+        }
+        caption{
+            background-color: lightblue;
+            font-weight: bold;
+        }
+            </style>
+{% endblock %}
